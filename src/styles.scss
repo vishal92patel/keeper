@@ -9,6 +9,8 @@ mat-icon {
 
 // NOTES
 .notes {
+	max-width: 1300px;
+    margin: 0 auto;
 	$note_padding_right_left: 4px;
 	.row {
 		display: flex;
@@ -23,7 +25,7 @@ mat-icon {
 	.column .note {
 		margin-top: 8px;
 		vertical-align: middle;
-		background: #fff;
+		background-color: #fff;
 	}
 	@media (max-width: 800px) {
 		.column {
@@ -54,3 +56,18 @@ mat-icon {
 	}
 // NOTES
 }
+// For Drag and Drop
+.cdk-drag-preview {
+	box-sizing: border-box;
+	border-radius: 4px;
+	box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+				0 8px 10px 1px rgba(0, 0, 0, 0.14),
+				0 3px 14px 2px rgba(0, 0, 0, 0.12);
+	padding: 15px 10px;
+	background-color: #fff;
+	opacity: 0.9;
+}
+.cdk-drag-placeholder {
+	opacity: 0.2;
+}
+// For Drag and Drop

@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 import { LeftSideNavComponent } from './left-side-nav/left-side-nav.component';
 import { MainContainerComponent } from './main-container/main-container.component';
@@ -26,7 +27,8 @@ import { MainContainerComponent } from './main-container/main-container.componen
 		MatIconModule,
 		MatSidenavModule,
 		MatListModule,
-		MatCardModule
+		MatCardModule,
+		DragDropModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]
