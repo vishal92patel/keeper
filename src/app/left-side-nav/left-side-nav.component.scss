@@ -1,0 +1,25 @@
+$mobile: 599px;
+.mat-drawer-content {
+	height: calc(100vh - 64px);
+	@media screen and (max-width: $mobile) {
+		height: calc(100vh - 56px);	
+	}
+	.my-profile {
+		border-radius: 0;
+		.mat-list-base {
+			padding: 0;
+			.mat-list-item-with-avatar {
+				height: inherit;
+			}
+		}
+	}
+	mat-sidenav {
+		min-width: 300px;
+		max-width: 500px;
+	}
+}
+.left-side-nav-menu {
+	.helper-text {
+		padding-left: 16px;
+	}
+}

@@ -1,0 +1,34 @@
+<mat-sidenav-container class="mat-drawer-content">
+	<mat-sidenav [mode]="over" #leftSideNav>
+		<mat-card class="my-profile">
+			<mat-list>
+				<mat-list>
+					<mat-list-item>
+						<img matListAvatar src="assets/default_profile_pic.jpg">
+						<h3 matLine>Vishal Patel</h3>
+						<p matLine>
+							<span>vishal@yahoo.com</span>
+						</p>
+					</mat-list-item>
+				</mat-list>
+			</mat-list>
+		</mat-card>
+		<mat-nav-list class="left-side-nav-menu">
+			<a mat-list-item href="#">
+				<mat-icon>list_vert</mat-icon>
+				<label class="helper-text">View Notes</label>
+			</a>
+			<a mat-list-item href="#">
+				<mat-icon>create_vert</mat-icon>
+				<label class="helper-text">Create Note</label>
+			</a>
+			<a mat-list-item href="#">
+				<mat-icon>logout_vert</mat-icon>
+				<label class="helper-text">Logout</label>
+			</a>
+		</mat-nav-list>
+	</mat-sidenav>
+	<mat-sidenav-content>
+		<app-main-container></app-main-container>
+	</mat-sidenav-content>
+</mat-sidenav-container>

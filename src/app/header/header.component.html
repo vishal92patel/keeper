@@ -1,0 +1,20 @@
+<mat-toolbar color="primary">
+	<span (click)="leftSideNavToggle()">
+		<mat-icon>menu_vert</mat-icon>
+		<span> Keeper</span>
+	</span>
+	<span class="fill-remaining-space"></span>
+	<span>
+		<mat-menu #appMenu="matMenu">
+			<button mat-menu-item>
+				<mat-icon>home_vert</mat-icon>
+				<span>Settings</span>
+			</button>
+			<button mat-menu-item>
+				<mat-icon>help_vert</mat-icon>
+				<span>Help</span>
+			</button>
+		</mat-menu>
+		<mat-icon [matMenuTriggerFor]="appMenu">more_vert</mat-icon>
+	</span>
+</mat-toolbar>
