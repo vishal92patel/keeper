@@ -46,15 +46,14 @@ export class MainContainerComponent implements OnInit {
 	columnsArray = [];
 	@HostListener('window:resize', ['$event'])
 	onResize(event?) {
-		console.log(window.innerWidth);
 		if (window.innerWidth) {
-			if (window.innerWidth >= 1281) {
+			if (window.innerWidth >= 1301) {
 				this.createColumn(6);
-			} else if (window.innerWidth >= 1025 && window.innerWidth <= 1280) {
+			} else if (window.innerWidth >= 1281 && window.innerWidth <= 1300) {
 				this.createColumn(5);
-			} else if (window.innerWidth >= 801 && window.innerWidth <= 1024) {
+			} else if (window.innerWidth >= 769 && window.innerWidth <= 1280) {
 				this.createColumn(4);
-			} else if (window.innerWidth >= 601 && window.innerWidth <= 800) {
+			} else if (window.innerWidth >= 601 && window.innerWidth <= 768) {
 				this.createColumn(3);
 			} else if (window.innerWidth >= 301 && window.innerWidth <= 600) {
 				this.createColumn(2);
@@ -63,6 +62,8 @@ export class MainContainerComponent implements OnInit {
 			} else {
 				this.createColumn();
 			}
+		} else {
+			this.createColumn();
 		}
 	}
 	constructor() { }
@@ -70,7 +71,7 @@ export class MainContainerComponent implements OnInit {
 	ngOnInit() {
 		this.onResize();
 	}
-	createColumn(nos = 1) {
+	createColumn(nos = 2) {
 		this.columnsArray = [];
 		for (let i = 0; i < nos; i++) {
 			this.columnsArray.push({
