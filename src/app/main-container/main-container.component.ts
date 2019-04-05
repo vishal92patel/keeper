@@ -46,52 +46,44 @@ export class MainContainerComponent implements OnInit {
 	columnsArray = [];
 	@HostListener('window:resize', ['$event'])
 	onResize(event?) {
+		console.log(window.innerWidth);
 		if (window.innerWidth) {
-			if (window.innerWidth >= 601) {
+			if (window.innerWidth >= 1281) {
+				this.createColumn(6);
+			} else if (window.innerWidth >= 1025 && window.innerWidth <= 1280) {
+				this.createColumn(5);
+			} else if (window.innerWidth >= 801 && window.innerWidth <= 1024) {
 				this.createColumn(4);
-			}
-			if (window.innerWidth <= 800 && window.innerWidth >= 600) {
+			} else if (window.innerWidth >= 601 && window.innerWidth <= 800) {
+				this.createColumn(3);
+			} else if (window.innerWidth >= 301 && window.innerWidth <= 600) {
 				this.createColumn(2);
-			}
-			if (window.innerWidth <= 600) {
+			} else if (window.innerWidth <= 300) {
 				this.createColumn(1);
+			} else {
+				this.createColumn();
 			}
 		}
 	}
 	constructor() { }
 
 	ngOnInit() {
-		this.createColumn(4);
+		this.onResize();
 	}
 	createColumn(nos = 1) {
 		this.columnsArray = [];
-		for(let i = 0; i < nos; i++) {
+		for (let i = 0; i < nos; i++) {
 			this.columnsArray.push({
 				column: i,
 				notes: []
 			});
 		}
 		for (let nd = 0; nd < this.notesData.length; nd++) {
-			if(nd == 0) {
+			if (nd == 0) {
 				this.columnsArray[0]['notes'].push(this.notesData[nd]);
 			} else {
-				this.columnsArray[nd%nos]['notes'].push(this.notesData[nd]);
+				this.columnsArray[nd % nos]['notes'].push(this.notesData[nd]);
 			}
 		}
-		console.log(this.columnsArray);
-		// columnsArray.forEach((ele) => {
-		// 	if (ele && ele['notes']  && ele['notes'].length > 0) {
-		// 		this.alignNotes += '<div class="column">';
-		// 		ele['notes'].forEach(eleNotes => {
-		// 			if (eleNotes) {
-		// 				this.alignNotes += '<div class="note"><div class="note-inner">';
-		// 				this.alignNotes += '<pre>' + eleNotes.id;
-		// 				this.alignNotes += eleNotes.text + '<pre>';
-		// 				this.alignNotes += '</div></div>';
-		// 			}
-		// 		});
-		// 		this.alignNotes += '</div>';
-		// 	}
-		// });
 	}
 }
