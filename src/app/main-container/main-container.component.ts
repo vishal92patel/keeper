@@ -44,26 +44,43 @@ export class MainContainerComponent implements OnInit {
 		text: ''
 	}];
 	columnsArray = [];
+	columnCreated;
 	@HostListener('window:resize', ['$event'])
 	onResize(event?) {
 		if (window.innerWidth) {
 			if (window.innerWidth >= 1301) {
-				this.createColumn(6);
+				if (this.columnCreated != 6) {
+					this.createColumn(6);
+				}
 			} else if (window.innerWidth >= 1281 && window.innerWidth <= 1300) {
-				this.createColumn(5);
+				if (this.columnCreated != 5) {
+					this.createColumn(5);
+				}
 			} else if (window.innerWidth >= 769 && window.innerWidth <= 1280) {
-				this.createColumn(4);
+				if (this.columnCreated != 4) {
+					this.createColumn(4);
+				}
 			} else if (window.innerWidth >= 601 && window.innerWidth <= 768) {
-				this.createColumn(3);
+				if (this.columnCreated != 3) {
+					this.createColumn(3);
+				}
 			} else if (window.innerWidth >= 301 && window.innerWidth <= 600) {
-				this.createColumn(2);
+				if (this.columnCreated != 2) {
+					this.createColumn(2);
+				}
 			} else if (window.innerWidth <= 300) {
-				this.createColumn(1);
+				if (this.columnCreated != 1) {
+					this.createColumn(1);
+				}
 			} else {
-				this.createColumn();
+				if (this.columnCreated != 2) {
+					this.createColumn();
+				}
 			}
 		} else {
-			this.createColumn();
+			if (this.columnCreated != 2) {
+				this.createColumn();
+			}
 		}
 	}
 	constructor() { }
@@ -72,6 +89,7 @@ export class MainContainerComponent implements OnInit {
 		this.onResize();
 	}
 	createColumn(nos = 2) {
+		this.columnCreated = nos;
 		this.columnsArray = [];
 		for (let i = 0; i < nos; i++) {
 			this.columnsArray.push({

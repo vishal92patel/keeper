@@ -8,9 +8,10 @@ mat-icon {
 }
 @mixin column($nos, $pading) {
 	$singleColumn: (100% / #{$nos});
-	$finalWidth: calc( #{$singleColumn} - (#{$pading} * #{$nos} * 2));
+	$finalWidth: calc(#{$singleColumn} - (#{$pading} * 2));
 	flex: #{$finalWidth};
-	max-width: #{$singleColumn};
+	max-width: #{$finalWidth};
+	width: #{$finalWidth};
 }
 // NOTES
 .notes {
@@ -88,6 +89,6 @@ mat-icon {
 	opacity: 0.9;
 }
 .cdk-drag-placeholder {
-	opacity: 0.2;
+	opacity: 0.5;
 }
 // For Drag and Drop
