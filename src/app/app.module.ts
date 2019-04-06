@@ -9,16 +9,20 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 import { LeftSideNavComponent } from './left-side-nav/left-side-nav.component';
 import { MainContainerComponent } from './main-container/main-container.component';
+import { LongPressDirective } from './directives/long-press.directive';
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		HeaderComponent,
 		LeftSideNavComponent,
-		MainContainerComponent
+		MainContainerComponent,
+		LongPressDirective
 	],
 	imports: [
 		BrowserAnimationsModule,
@@ -28,7 +32,9 @@ import { MainContainerComponent } from './main-container/main-container.componen
 		MatSidenavModule,
 		MatListModule,
 		MatCardModule,
-		DragDropModule
+		DragDropModule,
+		MatButtonModule,
+		MatTooltipModule
 	],
 	providers: [],
 	bootstrap: [AppComponent]

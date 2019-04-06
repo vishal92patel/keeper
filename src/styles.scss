@@ -17,7 +17,7 @@ mat-icon {
 .notes {
 	$note_padding_right_left: 4px;
 	max-width: 1920px;
-    margin: 0 auto;
+	margin: 0 auto;
 	.row {
 		display: flex;
 		flex-wrap: wrap;
@@ -27,6 +27,8 @@ mat-icon {
 		margin-top: 8px;
 		vertical-align: middle;
 		background-color: #fff;
+		border: solid transparent;
+		border-radius: 4px;
 	}
 	.column {
 		@include column(1, $note_padding_right_left);
@@ -59,7 +61,7 @@ mat-icon {
 		padding: 15px 10px;
 		background-color: #fff;
 		min-height: 1em;
-		border-radius: 2px;
+		border-radius: 4px;
 		box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14),0 3px 1px -2px rgba(0,0,0,0.2),0 1px 5px 0 rgba(0,0,0,0.12);
 		transition: box-shadow 0.2s;
 	}
@@ -74,6 +76,12 @@ mat-icon {
 		white-space: -pre-wrap;      /* Opera 4-6 */
 		white-space: -o-pre-wrap;    /* Opera 7 */
 		word-wrap: break-word;       /* Internet Explorer 5.5+ */
+	}
+	.press {
+		border: solid #dedede !important;
+	}
+	.longpress {
+		border: solid red !important;
 	}
 // NOTES
 }
