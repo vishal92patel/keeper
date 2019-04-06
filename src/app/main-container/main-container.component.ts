@@ -98,11 +98,29 @@ export class MainContainerComponent implements OnInit {
 			});
 		}
 		for (let nd = 0; nd < this.notesData.length; nd++) {
+			const newNotes = JSON.parse(JSON.stringify(this.notesData[nd]));
+			newNotes['extras'] = { 'index': nd };
 			if (nd == 0) {
-				this.columnsArray[0]['notes'].push(this.notesData[nd]);
+				this.columnsArray[0]['notes'].push(newNotes);
 			} else {
-				this.columnsArray[nd % nos]['notes'].push(this.notesData[nd]);
+				this.columnsArray[nd % nos]['notes'].push(newNotes);
 			}
+		}
+	}
+	drop(event) {
+		if (event) {
+			const dragFromColumnIndex = parseInt((event.previousContainer.id).replace('column-id-', ''));
+			const dropInColumnIndex = parseInt((event.container.id).replace('column-id-', ''));
+			const elementDragFromColumnsArray = this.columnsArray[dragFromColumnIndex].notes[event.previousIndex];
+			const elementDropOnFromColumnsArray = this.columnsArray[dropInColumnIndex].notes[event.currentIndex];
+			const getOrignalNoteFromData = this.notesData[elementDragFromColumnsArray.extras.index];
+			if (elementDragFromColumnsArray && elementDropOnFromColumnsArray) {
+				this.notesData.splice(elementDragFromColumnsArray.extras.index, 1);
+				this.notesData.splice(elementDropOnFromColumnsArray.extras.index, 0, getOrignalNoteFromData);
+				this.createColumn(this.columnCreated);
+			}
+		} else {
+			alert("Went something wrong");
 		}
 	}
 }

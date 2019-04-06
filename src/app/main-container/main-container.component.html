@@ -1,6 +1,6 @@
 <div class="notes">
 	<div class="row" cdkDropListGroup>
-		<div class="column" *ngFor="let CA of columnsArray" cdkDropList>
+		<div class="column" [id]="'column-id-'+i" *ngFor="let CA of columnsArray; let i = index;" cdkDropList (cdkDropListDropped)="drop($event)">
 			<div class="note" *ngFor="let note of CA?.notes" cdkDrag>
 				<div class="note-inner">
 					{{note.id}}
