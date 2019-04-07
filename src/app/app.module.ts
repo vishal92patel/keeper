@@ -11,10 +11,12 @@ import { MatCardModule } from '@angular/material/card';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatDialogModule } from '@angular/material/dialog';
 
 import { LeftSideNavComponent } from './left-side-nav/left-side-nav.component';
 import { MainContainerComponent } from './main-container/main-container.component';
 import { LongPressDirective } from './directives/long-press.directive';
+import { EditNoteDialogComponent } from './edit-note-dialog/edit-note-dialog.component';
 
 @NgModule({
 	declarations: [
@@ -22,7 +24,8 @@ import { LongPressDirective } from './directives/long-press.directive';
 		HeaderComponent,
 		LeftSideNavComponent,
 		MainContainerComponent,
-		LongPressDirective
+		LongPressDirective,
+		EditNoteDialogComponent
 	],
 	imports: [
 		BrowserAnimationsModule,
@@ -34,9 +37,11 @@ import { LongPressDirective } from './directives/long-press.directive';
 		MatCardModule,
 		DragDropModule,
 		MatButtonModule,
-		MatTooltipModule
+		MatTooltipModule,
+		MatDialogModule
 	],
 	providers: [],
-	bootstrap: [AppComponent]
+	bootstrap: [AppComponent],
+	entryComponents: [EditNoteDialogComponent]
 })
 export class AppModule { }

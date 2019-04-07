@@ -1,4 +1,6 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material';
+import { EditNoteDialogComponent } from '../edit-note-dialog/edit-note-dialog.component';
 
 @Component({
 	selector: 'app-main-container',
@@ -23,7 +25,7 @@ export class MainContainerComponent implements OnInit {
 		text: ''
 	}, {
 		id: '6',
-		text: `dmakd dmdkla <br> ddadada
+		text: `6dmakd dmdkla <br> ddadada
 		dfdfdsf  fdsf
 		<b>dsfsdfsd</b>
 		dsf
@@ -45,14 +47,15 @@ export class MainContainerComponent implements OnInit {
 	}];
 	columnsArray = [];
 	columnCreated;
+	@ViewChild('test') test;
 	@HostListener('window:resize', ['$event'])
 	onResize(event?) {
 		if (window.innerWidth) {
-			if (window.innerWidth >= 1301) {
+			if (window.innerWidth >= 1921) {
 				if (this.columnCreated != 6) {
 					this.createColumn(6);
 				}
-			} else if (window.innerWidth >= 1281 && window.innerWidth <= 1300) {
+			} else if (window.innerWidth >= 1281 && window.innerWidth <= 1920) {
 				if (this.columnCreated != 5) {
 					this.createColumn(5);
 				}
@@ -83,7 +86,7 @@ export class MainContainerComponent implements OnInit {
 			}
 		}
 	}
-	constructor() { }
+	constructor(private matDialog: MatDialog) { }
 
 	ngOnInit() {
 		this.onResize();
@@ -122,5 +125,17 @@ export class MainContainerComponent implements OnInit {
 		} else {
 			alert("Went something wrong");
 		}
+	}
+	openDialog(i) {
+		const dialogRef = this.matDialog.open(EditNoteDialogComponent, {
+			maxWidth: '90%',
+			height: '90%',
+			disableClose: true,
+			data: { id: i, note: this.notesData[i] }
+		});
+
+		dialogRef.afterClosed().subscribe(result => {
+			console.log(result);
+		});
 	}
 }
