@@ -1,10 +1,24 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "variable.scss";
 body {
 	margin: 0 auto;
 }
 mat-icon {
 	vertical-align: middle;
 	cursor: pointer;
+}
+.header {
+	position: absolute;
+	z-index: 5;
+	top: 0;
+	left: 0;
+	box-shadow:0 3px 5px -1px rgba(0,0,0,.2),0 5px 8px 0 rgba(0,0,0,.14),0 1px 14px 0 rgba(0,0,0,.12);	
+}
+.container-with-sticky-header {
+	margin-top: $stickyHeaderHeight !important;
+	@media screen and (max-width: $maxMobileWidth) {
+		margin-top: $mobileStickyHeaderHeight !important;
+	}
 }
 @mixin column($nos, $pading) {
 	$singleColumn: (100% / #{$nos});
@@ -13,7 +27,7 @@ mat-icon {
 	max-width: #{$finalWidth};
 	width: #{$finalWidth};
 }
-// NOTES
+// START NOTES 
 .notes {
 	$note_padding_right_left: 4px;
 	max-width: 1920px;
@@ -83,9 +97,9 @@ mat-icon {
 	.longpress {
 		border: solid red !important;
 	}
-// NOTES
 }
-// For Drag and Drop
+// END NOTES
+// START DRAG AND DROP
 .cdk-drag-preview {
 	box-sizing: border-box;
 	border-radius: 4px;
@@ -99,4 +113,58 @@ mat-icon {
 .cdk-drag-placeholder {
 	opacity: 0.5;
 }
-// For Drag and Drop
+// END DRAG AND DROP
+// START EDIT NOTE DILOIG
+.edit-note-dialog {
+	.mat-dialog-title {
+		margin: 0 auto;
+		.action-icon {
+			padding: 0 14px;
+		}
+	}
+	.mat-dialog-container {
+		border-radius: 0;
+		padding: 0;
+	}
+	.mat-dialog-content {
+		margin: auto;
+	}
+	.mat-dialog-actions {
+		background: #f5f5f5;
+		margin: 0 auto;
+		height: auto;
+		min-height: auto;
+		padding: 16px;
+	}
+	.mat-dialog-content {
+		// total - (header + footer)
+		min-height: calc(100vh - (#{$stickyHeaderHeight} + #{$noteEditDialogFooterHeight}));
+		overflow-y: auto;
+		overflow-x: hidden;
+		pre {
+			// total - (header + footer + pre border)
+			min-height: calc(100vh - (#{$stickyHeaderHeight} + #{$noteEditDialogFooterHeight} + 2px));
+			margin: 0 auto;
+			border: solid 1px #dedede;
+			background: #fdffec;
+			white-space: pre-wrap;       /* Since CSS 2.1 */
+			white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+			white-space: -pre-wrap;      /* Opera 4-6 */
+			white-space: -o-pre-wrap;    /* Opera 7 */
+			word-wrap: break-word;       /* Internet Explorer 5.5+ */
+		}
+		@media screen and (max-width: $maxMobileWidth) {
+			pre {
+				// total - (header + footer + pre border)
+				min-height: calc(100vh - (#{$mobileStickyHeaderHeight} + #{$noteEditDialogFooterHeight} + 2px));
+			}
+		}
+	}
+	@media screen and (max-width: $maxMobileWidth) {
+		.mat-dialog-content {
+			// total - (header + footer)
+			min-height: calc(100vh - (#{$mobileStickyHeaderHeight} + #{$noteEditDialogFooterHeight}));
+		}	
+	}
+}
+// END EDIT NOTE DILOIG

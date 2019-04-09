@@ -1,16 +1,17 @@
-<h1 mat-dialog-title>Hi</h1>
-<div mat-dialog-content>
-  <p>What's your favorite animal?</p>
-  <pre>
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
+<div mat-dialog-title>
+	<mat-toolbar color="primary" class="header">
+		<mat-toolbar-row>
+			<span (click)="closeDialog(data?.id)">
+				<mat-icon>arrow_back_vert</mat-icon>
+			</span>
+			<span class="fill-remaining-space"></span>
+			<mat-icon class="action-icon">home_vert</mat-icon>
+			<mat-icon class="action-icon">help_vert</mat-icon>
+		</mat-toolbar-row>
+	</mat-toolbar>
+</div>
+<div mat-dialog-content class="container-with-sticky-header">
+	<pre>
     {{data?.note?.text}}
     {{data?.note?.text}}
     {{data?.note?.text}}
@@ -32,6 +33,5 @@
   </pre>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="onNoClick()">No Thanks</button>
-  <button mat-button [mat-dialog-close]="data.animal" cdkFocusInitial>Ok</button>
+	<span>Edited on 04:26 AM</span>
 </div>
