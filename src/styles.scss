@@ -109,6 +109,11 @@ mat-icon {
 	padding: 15px 10px;
 	background-color: #fff;
 	opacity: 0.9;
+	white-space: pre-wrap;       /* Since CSS 2.1 */
+	white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+	white-space: -pre-wrap;      /* Opera 4-6 */
+	white-space: -o-pre-wrap;    /* Opera 7 */
+	word-wrap: break-word;       /* Internet Explorer 5.5+ */
 }
 .cdk-drag-placeholder {
 	opacity: 0.5;
@@ -141,22 +146,32 @@ mat-icon {
 		min-height: calc(100vh - (#{$stickyHeaderHeight} + #{$noteEditDialogFooterHeight}));
 		overflow-y: auto;
 		overflow-x: hidden;
-		pre {
+		.noteTextArea {
+			width: calc(100% - 42px);
 			// total - (header + footer + pre border)
-			min-height: calc(100vh - (#{$stickyHeaderHeight} + #{$noteEditDialogFooterHeight} + 2px));
-			margin: 0 auto;
-			border: solid 1px #dedede;
+			min-height: calc(100vh - (#{$stickyHeaderHeight} + #{$noteEditDialogFooterHeight} + 42px));
 			background: #fdffec;
+			border: solid 1px #dedede;
+			margin: 5px;
+			padding: 15px;
+			overflow: auto;
+			resize: none; /*remove the resize handle on the bottom right*/
+			outline-offset: 0;
+			outline: none;
+			vertical-align: top;
 			white-space: pre-wrap;       /* Since CSS 2.1 */
 			white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
 			white-space: -pre-wrap;      /* Opera 4-6 */
 			white-space: -o-pre-wrap;    /* Opera 7 */
 			word-wrap: break-word;       /* Internet Explorer 5.5+ */
+			-webkit-box-shadow: none;
+			-moz-box-shadow: none;
+			box-shadow: none;
 		}
 		@media screen and (max-width: $maxMobileWidth) {
-			pre {
+			.noteTextArea {
 				// total - (header + footer + pre border)
-				min-height: calc(100vh - (#{$mobileStickyHeaderHeight} + #{$noteEditDialogFooterHeight} + 2px));
+				min-height: calc(100vh - (#{$mobileStickyHeaderHeight} + #{$noteEditDialogFooterHeight} + 42px));
 			}
 		}
 	}

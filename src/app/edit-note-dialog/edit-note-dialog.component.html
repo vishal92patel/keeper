@@ -11,26 +11,7 @@
 	</mat-toolbar>
 </div>
 <div mat-dialog-content class="container-with-sticky-header">
-	<pre>
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}{{data?.note?.text}}
-    {{data?.note?.text}}{{data?.note?.text}}
-    {{data?.note?.text}}{{data?.note?.text}}
-    {{data?.note?.text}}
-  
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}
-    {{data?.note?.text}}{{data?.note?.text}}{{data?.note?.text}}{{data?.note?.text}}
-  
-    {{data?.note?.text}}{{data?.note?.text}}{{data?.note?.text}}
-    {{data?.note?.text}}{{data?.note?.text}}{{data?.note?.text}}{{data?.note?.text}}
-    Vishal
-  </pre>
+	<textarea class="noteTextArea" [value]="data?.note?.text"></textarea>
 </div>
 <div mat-dialog-actions>
 	<span>Edited on 04:26 AM</span>
