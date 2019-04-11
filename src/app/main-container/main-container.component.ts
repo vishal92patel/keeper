@@ -138,7 +138,10 @@ export class MainContainerComponent implements OnInit {
 		});
 
 		dialogRef.afterClosed().subscribe(result => {
-			console.log(result);
+			if (result) {
+				this.notesData[result.id].text = JSON.parse(JSON.stringify(result.note.newText));
+				this.createColumn(this.columnCreated);
+			}
 		});
 	}
 }

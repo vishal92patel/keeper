@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 
 @Component({
@@ -7,14 +7,19 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 	styleUrls: ['./edit-note-dialog.component.scss']
 })
 export class EditNoteDialogComponent implements OnInit {
-
+	@ViewChild('editNoteTextarea') editNoteTextarea;
 	constructor(private dialogRef: MatDialogRef<EditNoteDialogComponent>,
 		@Inject(MAT_DIALOG_DATA) private data) { }
 
-	ngOnInit() { }
+	ngOnInit() {}
 
 	closeDialog(i) {
-		this.dialogRef.close();
+		if (this.editNoteTextarea && this.editNoteTextarea.nativeElement) {
+			if (this.data && this.data.note) {
+				this.data.note['newText'] = JSON.parse(JSON.stringify(this.editNoteTextarea.nativeElement.value));
+			}
+		}
+		this.dialogRef.close(this.data);
 	}
 
 }
