@@ -18,6 +18,8 @@ import { MainContainerComponent } from './main-container/main-container.componen
 import { LongPressDirective } from './directives/long-press.directive';
 import { EditNoteDialogComponent } from './edit-note-dialog/edit-note-dialog.component';
 
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
 	declarations: [
 		AppComponent,
@@ -38,7 +40,8 @@ import { EditNoteDialogComponent } from './edit-note-dialog/edit-note-dialog.com
 		DragDropModule,
 		MatButtonModule,
 		MatTooltipModule,
-		MatDialogModule
+		MatDialogModule,
+		HttpClientModule
 	],
 	providers: [],
 	bootstrap: [AppComponent],

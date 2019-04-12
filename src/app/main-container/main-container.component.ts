@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { EditNoteDialogComponent } from '../edit-note-dialog/edit-note-dialog.component';
+import { GlobalService } from '../services/global.service';
 
 @Component({
 	selector: 'app-main-container',
@@ -8,43 +9,7 @@ import { EditNoteDialogComponent } from '../edit-note-dialog/edit-note-dialog.co
 	styleUrls: ['./main-container.component.scss']
 })
 export class MainContainerComponent implements OnInit {
-	notesData = [{
-		id: '1',
-		text: 'dmakd dmdkla <br> ddadada'
-	}, {
-		id: '2',
-		text: 'dasd d332 rr <>br <br> ffw ff <br> dfsf'
-	}, {
-		id: '3',
-		text: ''
-	}, {
-		id: '4',
-		text: ''
-	}, {
-		id: '5',
-		text: ''
-	}, {
-		id: '6',
-		text: `6dmakd dmdkla <br> ddadada
-		dfdfdsf  fdsf
-		<b>dsfsdfsd</b>
-		dsf
-		s
-		fds
-		`
-	}, {
-		id: '7',
-		text: ''
-	}, {
-		id: '8',
-		text: ''
-	}, {
-		id: '9',
-		text: ''
-	}, {
-		id: '10',
-		text: ''
-	}];
+	notesData: any = [];
 	columnsArray = [];
 	columnCreated;
 	@ViewChild('test') test;
@@ -86,10 +51,14 @@ export class MainContainerComponent implements OnInit {
 			}
 		}
 	}
-	constructor(private matDialog: MatDialog) { }
+	constructor(private matDialog: MatDialog,
+		private globalService: GlobalService) { }
 
 	ngOnInit() {
-		this.onResize();
+		this.globalService.getNotes().subscribe((data) => {
+			this.notesData = data;
+			this.onResize();
+		});
 	}
 	createColumn(nos = 2) {
 		this.columnCreated = nos;
