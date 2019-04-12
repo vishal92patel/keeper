@@ -1,4 +1,4 @@
-import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { EditNoteDialogComponent } from '../edit-note-dialog/edit-note-dialog.component';
 import { GlobalService } from '../services/global.service';
@@ -12,7 +12,6 @@ export class MainContainerComponent implements OnInit {
 	notesData: any = [];
 	columnsArray = [];
 	columnCreated;
-	@ViewChild('test') test;
 	@HostListener('window:resize', ['$event'])
 	onResize(event?) {
 		if (window.innerWidth) {
@@ -55,8 +54,11 @@ export class MainContainerComponent implements OnInit {
 		private globalService: GlobalService) { }
 
 	ngOnInit() {
+		// console.log(this.globalService.encrypt([{name: 'vishal'}]));
+		// console.log(this.globalService.decrypt("8b7f18cf27dcbddf8480f24220a35a1f73"));
 		this.globalService.getNotes().subscribe((data) => {
-			this.notesData = data;
+			console.log(data);
+			this.notesData = this.globalService.decrypt(data);
 			this.onResize();
 		});
 	}

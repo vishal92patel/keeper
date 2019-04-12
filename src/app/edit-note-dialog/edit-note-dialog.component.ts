@@ -11,7 +11,7 @@ export class EditNoteDialogComponent implements OnInit {
 	constructor(private dialogRef: MatDialogRef<EditNoteDialogComponent>,
 		@Inject(MAT_DIALOG_DATA) private data) { }
 
-	ngOnInit() {}
+	ngOnInit() { }
 
 	closeDialog(i) {
 		if (this.editNoteTextarea && this.editNoteTextarea.nativeElement) {
