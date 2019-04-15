@@ -11,7 +11,7 @@
 	</mat-toolbar>
 </div>
 <div mat-dialog-content class="container-with-sticky-header">
-	<textarea class="noteTextArea" [value]="data?.note?.text" #editNoteTextarea></textarea>
+	<textarea class="noteTextArea" [value]="data?.note?.text" #editNoteTextarea (keyup)="textareaKeyup(data?.id)"></textarea>
 </div>
 <div mat-dialog-actions class="primary">
 	<span>Edited 4 Apr 04:26 AM</span>

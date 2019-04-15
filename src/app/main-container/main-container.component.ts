@@ -54,11 +54,8 @@ export class MainContainerComponent implements OnInit {
 		private globalService: GlobalService) { }
 
 	ngOnInit() {
-		// console.log(this.globalService.encrypt([{name: 'vishal'}]));
-		// console.log(this.globalService.decrypt("8b7f18cf27dcbddf8480f24220a35a1f73"));
 		this.globalService.getNotes().subscribe((data) => {
-			console.log(data);
-			this.notesData = this.globalService.decrypt(data);
+			this.notesData = this.globalService.decryptObject(data);
 			this.onResize();
 		});
 	}
@@ -105,14 +102,23 @@ export class MainContainerComponent implements OnInit {
 			maxHeight: '100%',
 			disableClose: false,
 			panelClass: 'edit-note-dialog',
-			data: { id: i, note: this.notesData[i] }
+			data: { id: i, note: JSON.parse(JSON.stringify(this.notesData[i])) }
 		});
 
-		dialogRef.afterClosed().subscribe(result => {
+		dialogRef.afterClosed().subscribe((result) => {
 			if (result) {
-				this.notesData[result.id].text = JSON.parse(JSON.stringify(result.note.newText));
-				this.createColumn(this.columnCreated);
+				this.updateNote(result);
 			}
 		});
+		dialogRef.componentInstance.updateNoteData.subscribe((result) => {
+			if (result) {
+				this.updateNote(result);
+			}
+		});
+	}
+	updateNote(result) {
+		this.notesData[result.id].text = result.note.newText;
+		this.createColumn(this.columnCreated);
+		this.globalService.encryptObject(this.notesData);
 	}
 }
