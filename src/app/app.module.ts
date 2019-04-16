@@ -21,30 +21,30 @@ import { EditNoteDialogComponent } from './edit-note-dialog/edit-note-dialog.com
 import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		HeaderComponent,
-		LeftSideNavComponent,
-		MainContainerComponent,
-		LongPressDirective,
-		EditNoteDialogComponent
-	],
-	imports: [
-		BrowserAnimationsModule,
-		MatToolbarModule,
-		MatMenuModule,
-		MatIconModule,
-		MatSidenavModule,
-		MatListModule,
-		MatCardModule,
-		DragDropModule,
-		MatButtonModule,
-		MatTooltipModule,
-		MatDialogModule,
-		HttpClientModule
-	],
-	providers: [],
-	bootstrap: [AppComponent],
-	entryComponents: [EditNoteDialogComponent]
+    declarations: [
+        AppComponent,
+        HeaderComponent,
+        LeftSideNavComponent,
+        MainContainerComponent,
+        LongPressDirective,
+        EditNoteDialogComponent
+    ],
+    imports: [
+        BrowserAnimationsModule,
+        MatToolbarModule,
+        MatMenuModule,
+        MatIconModule,
+        MatSidenavModule,
+        MatListModule,
+        MatCardModule,
+        DragDropModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatDialogModule,
+        HttpClientModule
+    ],
+    providers: [],
+    bootstrap: [AppComponent],
+    entryComponents: [EditNoteDialogComponent]
 })
 export class AppModule { }
