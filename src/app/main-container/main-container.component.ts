@@ -97,7 +97,6 @@ export class MainContainerComponent implements OnInit {
         const dialogRef = this.matDialog.open(EditNoteDialogComponent, {
             width: '100%',
             maxWidth: '100%',
-            height: '100%',
             maxHeight: '100%',
             disableClose: false,
             panelClass: 'edit-note-dialog',
