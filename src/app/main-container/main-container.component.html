@@ -1,8 +1,11 @@
 <div class="notes">
 	<div class="row" cdkDropListGroup>
 		<div class="column" [id]="'column-id-'+i" *ngFor="let CA of columnsArray; let i = index;" cdkDropList (cdkDropListDropped)="drop($event)">
-			<div class="note" *ngFor="let note of CA?.notes" cdkDrag (click)="openDialog(note?.extras?.index)">
-				<div class="note-inner">
+			<div class="note" *ngFor="let note of CA?.notes" cdkDrag>
+				<div class="drag-handler">
+					<i class="material-icons" cdkDragHandle>drag_handle</i>
+				</div>
+				<div class="note-inner" (click)="openDialog(note?.extras?.index)">
 					{{note.id}}
 					<pre>{{note.text}}</pre>
 				</div>
