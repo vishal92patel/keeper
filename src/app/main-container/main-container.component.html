@@ -1,18 +1,22 @@
-<div class="notes">
-	<div class="row" cdkDropListGroup>
-		<div class="column" [id]="'column-id-'+i" *ngFor="let CA of columnsArray; let i = index;" cdkDropList (cdkDropListDropped)="drop($event)">
-			<div class="note" *ngFor="let note of CA?.notes" cdkDrag>
-				<div class="drag-handler">
-					<i class="material-icons" cdkDragHandle>drag_handle</i>
-				</div>
-				<div class="note-inner" (click)="openDialog(note?.extras?.index)">
-					{{note.id}}
-					<pre>{{note.text}}</pre>
+<div cdkDropListGroup>
+	<div class="notes">
+		<div class="row">
+			<div class="column" [id]="'column-id-'+i" *ngFor="let CA of columnsArray; let i = index;" cdkDropList (cdkDropListDropped)="drop($event)">
+				<div class="note" [ngClass]="{'test': dragNoteAndHoverOnRemoveBtn}" *ngFor="let note of CA?.notes" cdkDrag (cdkDragMoved)="cdkDragMoved($event)">
+					<div class="drag-handler">
+						<i class="material-icons" cdkDragHandle>drag_handle</i>
+					</div>
+					<div class="note-inner" (click)="openDialog(note?.extras?.index)">
+						{{note.id}}
+						<pre>{{note.text}}</pre>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	<div class="fab-add-new-note addNRemoveFlatButtonIdentifier" cdkDropList (cdkDropListDropped)="onDropRemoveNote($event)">
+		<button class="addNRemoveFlatButtonIdentifier" mat-fab [matTooltip]="(dragNoteAndHoverOnRemoveBtn) ? 'Delete note': 'Create new note'" matTooltipPosition="left">
+			<mat-icon class="addNRemoveFlatButtonIdentifier">{{(dragNoteAndHoverOnRemoveBtn) ? 'remove': 'add'}}</mat-icon>
+		</button>
+	</div>
 </div>
-<button mat-fab class="fab-add-new-note" matTooltip="Create new note" matTooltipPosition="left">
-	<mat-icon>add</mat-icon>
-</button>

@@ -12,6 +12,7 @@ export class MainContainerComponent implements OnInit {
     notesData: any = [];
     columnsArray = [];
     columnCreated: number;
+    dragNoteAndHoverOnRemoveBtn = false;
     @HostListener('window:resize', ['$event'])
     onResize(event?) {
         if (window.innerWidth) {
@@ -78,6 +79,7 @@ export class MainContainerComponent implements OnInit {
         }
     }
     drop(event) {
+        this.dragNoteAndHoverOnRemoveBtn = false;
         if (event) {
             const dragFromColumnIndex = parseInt((event.previousContainer.id).replace('column-id-', ''), 10);
             const dropInColumnIndex = parseInt((event.container.id).replace('column-id-', ''), 10);
@@ -117,5 +119,24 @@ export class MainContainerComponent implements OnInit {
         this.notesData[result.id].text = result.note.newText;
         this.createColumn(this.columnCreated);
         this.globalService.encryptObject(this.notesData);
+    }
+    onDropRemoveNote(e) {
+        this.dragNoteAndHoverOnRemoveBtn = false;
+        console.log(e);
+    }
+    cdkDragMoved(e) {
+        this.dragNoteAndHoverOnRemoveBtn = true;
+        const preview: any = document.getElementsByClassName('cdk-drag-preview')[0].childNodes[1];
+        if (e && e.event && e.event.path) {
+            if (e.event.path[0].classList.contains('addNRemoveFlatButtonIdentifier')) {
+                preview.style.display = 'none';
+            } else if (e.event.path[1].classList.contains('addNRemoveFlatButtonIdentifier')) {
+                preview.style.display = 'none';
+            } else if (e.event.path[2].classList.contains('addNRemoveFlatButtonIdentifier')) {
+                preview.style.display = 'none';
+            } else {
+                preview.style.display = 'block';
+            }
+        }
     }
 }

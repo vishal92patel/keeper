@@ -11,6 +11,9 @@ mat-icon {
 	vertical-align: middle;
 	cursor: pointer;
 }
+.mat-tooltip  {
+	z-index: 99999 !important;
+}
 .header {
 	position: fixed;
 	z-index: 1000;
@@ -201,3 +204,10 @@ mat-icon {
 	}
 }
 // END EDIT NOTE DILOIG
+// START ON HOVER ON ADD/DELETE ICON
+.fab-add-new-note {
+	.cdk-drag-placeholder {
+		display: none;
+	}
+}
+// END ON HOVER ON ADD/DELETE ICON

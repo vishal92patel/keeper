@@ -1,5 +1,12 @@
 .fab-add-new-note {
+	transition: all .2s ease-in-out;
 	position: fixed;
 	right: 20px;
 	bottom: 20px;
+	mat-icon {
+		vertical-align: top;
+	}
+}
+.fab-add-new-note:hover {
+	transform: scale(1.3);
 }
