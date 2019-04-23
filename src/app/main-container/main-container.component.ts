@@ -1,7 +1,8 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material';
 import { EditNoteDialogComponent } from '../edit-note-dialog/edit-note-dialog.component';
 import { GlobalService } from '../services/global.service';
+import { MatTooltip } from '@angular/material';
 
 @Component({
     selector: 'app-main-container',
@@ -13,6 +14,7 @@ export class MainContainerComponent implements OnInit {
     columnsArray = [];
     columnCreated: number;
     dragNoteAndHoverOnRemoveBtn = false;
+    @ViewChild('fabAddNewNoteTooltip') fabAddNewNoteTooltip: MatTooltip;
     @HostListener('window:resize', ['$event'])
     onResize(event?) {
         if (window.innerWidth) {
@@ -121,22 +123,33 @@ export class MainContainerComponent implements OnInit {
         this.globalService.encryptObject(this.notesData);
     }
     onDropRemoveNote(e) {
+        const fabAddNewNote = document.getElementById('fab-add-new-note');
+        fabAddNewNote.classList.remove('hover');
+        this.fabAddNewNoteTooltip.hide();
         this.dragNoteAndHoverOnRemoveBtn = false;
-        console.log(e);
+        if (e.item.element.nativeElement.dataset.index) {
+            this.notesData.splice(e.item.element.nativeElement.dataset.index, 1);
+            this.createColumn(this.columnCreated);
+        }
     }
     cdkDragMoved(e) {
         this.dragNoteAndHoverOnRemoveBtn = true;
-        const preview: any = document.getElementsByClassName('cdk-drag-preview')[0].childNodes[1];
-        if (e && e.event && e.event.path) {
-            if (e.event.path[0].classList.contains('addNRemoveFlatButtonIdentifier')) {
-                preview.style.display = 'none';
-            } else if (e.event.path[1].classList.contains('addNRemoveFlatButtonIdentifier')) {
-                preview.style.display = 'none';
-            } else if (e.event.path[2].classList.contains('addNRemoveFlatButtonIdentifier')) {
-                preview.style.display = 'none';
-            } else {
-                preview.style.display = 'block';
-            }
+        const fabAddNewNote = document.getElementById('fab-add-new-note');
+        const fabAddNewNoteStartY = fabAddNewNote.offsetTop;
+        const fabAddNewNoteEndY = fabAddNewNote.offsetTop + 56;
+        const fabAddNewNoteStartX = fabAddNewNote.offsetLeft;
+        const fabAddNewNoteEndX = fabAddNewNote.offsetLeft + 56;
+        const previewInnerNote: any = document.getElementsByClassName('cdk-drag-preview')[0].childNodes[1];
+        const previewNoteHandler: any = document.getElementsByClassName('cdk-drag-preview')[0].childNodes[0];
+        // tslint:disable-next-line:max-line-length
+        if ((fabAddNewNoteStartX <= e.pointerPosition.x && fabAddNewNoteEndX >= e.pointerPosition.x) && (fabAddNewNoteStartY <= e.pointerPosition.y && fabAddNewNoteEndY >= e.pointerPosition.y)) {
+            fabAddNewNote.classList.add('hover');
+            previewInnerNote.style.display = 'none';
+            this.fabAddNewNoteTooltip.show();
+        } else {
+            fabAddNewNote.classList.remove('hover');
+            previewInnerNote.style.display = 'block';
+            this.fabAddNewNoteTooltip.hide();
         }
     }
 }

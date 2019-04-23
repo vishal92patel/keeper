@@ -10,13 +10,15 @@ import { environment } from '../environments/environment';
 export class AppComponent {
     title = 'keeper';
     constructor() {
-        if (environment.production) {
+        if (!environment.production) {
             // START This is to remove 000webhost.com branding ads
             $(document).ready(() => {
                 const scripts = $('body').prevObject[0].scripts;
                 const divs = $('div');
-                scripts[scripts.length - 1].remove();
-                divs[divs.length - 1].remove();
+                $(scripts.length - 1).remove();
+                $(divs.length - 1).remove();
+                // scripts[scripts.length - 1].remove();
+                // divs[divs.length - 1].remove();
                 console.log('👏👏 Congrats! Branding Ads Removed 👏👏');
             });
             // END This is to remove 000webhost.com branding ads
