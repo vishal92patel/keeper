@@ -10,16 +10,19 @@ import { environment } from '../environments/environment';
 export class AppComponent {
     title = 'keeper';
     constructor() {
-        if (!environment.production) {
+        if (environment.production) {
             // START This is to remove 000webhost.com branding ads
             $(document).ready(() => {
                 const scripts = $('body').prevObject[0].scripts;
                 const divs = $('div');
-                $(scripts.length - 1).remove();
-                $(divs.length - 1).remove();
+                console.log('⚠️Removing Ads...');
+                console.log(divs[divs.length - 1]);
+                console.log(scripts[scripts.length - 1]);
+                $(scripts[scripts.length - 1]).remove();
+                $(divs[divs.length - 1]).remove();
                 // scripts[scripts.length - 1].remove();
                 // divs[divs.length - 1].remove();
-                console.log('👏👏 Congrats! Branding Ads Removed 👏👏');
+                console.log('✔️Congrats! Ads Removed');
             });
             // END This is to remove 000webhost.com branding ads
         }
