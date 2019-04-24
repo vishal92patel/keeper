@@ -58,26 +58,34 @@ export class MainContainerComponent implements OnInit {
     ngOnInit() {
         this.globalService.getNotes().subscribe((data) => {
             this.notesData = this.globalService.decryptObject(data);
-            this.onResize();
+            if (this.notesData) {
+                this.onResize();
+            } else {
+
+            }
         });
     }
     createColumn(nos = 2) {
-        this.columnCreated = nos;
-        this.columnsArray = [];
-        for (let i = 0; i < nos; i++) {
-            this.columnsArray.push({
-                column: i,
-                notes: []
-            });
-        }
-        for (let nd = 0; nd < this.notesData.length; nd++) {
-            const newNotes = JSON.parse(JSON.stringify(this.notesData[nd]));
-            newNotes.extras = { index: nd };
-            if (nd === 0) {
-                this.columnsArray[0].notes.push(newNotes);
-            } else {
-                this.columnsArray[nd % nos].notes.push(newNotes);
+        if (this.notesData) {
+            this.columnCreated = nos;
+            this.columnsArray = [];
+            for (let i = 0; i < nos; i++) {
+                this.columnsArray.push({
+                    column: i,
+                    notes: []
+                });
             }
+            for (let nd = 0; nd < this.notesData.length; nd++) {
+                const newNotes = JSON.parse(JSON.stringify(this.notesData[nd]));
+                newNotes.extras = { index: nd };
+                if (nd === 0) {
+                    this.columnsArray[0].notes.push(newNotes);
+                } else {
+                    this.columnsArray[nd % nos].notes.push(newNotes);
+                }
+            }
+        } else {
+
         }
     }
     drop(event) {

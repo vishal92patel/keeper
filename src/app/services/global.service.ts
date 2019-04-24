@@ -8,8 +8,14 @@ import * as cryptoJs from 'crypto-js';
 })
 export class GlobalService {
     toggleLeftSideNav: EventEmitter<any> = new EventEmitter();
-    secret = 'password';
-    constructor(private http: HttpClient) { }
+    private secret: string = null;
+    constructor(private http: HttpClient) {
+        try {
+            this.secret = cryptoJs.MD5('password').toString();
+        } catch (e) {
+            this.secret = null;
+        }
+    }
 
     getNotes() {
         return this.http.get('assets/notesData.txt', { responseType: 'text' });
@@ -19,17 +25,17 @@ export class GlobalService {
             try {
                 return cryptoJs.AES.encrypt(JSON.stringify(data), this.secret).toString();
             } catch (e) {
-                return [];
+                return false;
             }
         } else {
-            return [];
+            return false;
         }
     }
     decryptObject(data) {
         try {
             return JSON.parse(cryptoJs.AES.decrypt(data, this.secret).toString(cryptoJs.enc.Utf8));
         } catch (e) {
-            return [];
+            return false;
         }
     }
 
